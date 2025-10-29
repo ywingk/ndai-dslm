@@ -1,1 +1,2 @@
-# ndai-domain-slm
+# Domain SLM Project 
+

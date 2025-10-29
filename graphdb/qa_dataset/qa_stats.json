@@ -1,0 +1,14 @@
+{
+  "total": 536,
+  "by_level": {
+    "level1": 136,
+    "level2": 200,
+    "level3": 100,
+    "complex": 100
+  },
+  "by_difficulty": {
+    "easy": 136,
+    "medium": 200,
+    "hard": 200
+  }
+}
