@@ -62,9 +62,12 @@ class UCOMapper:
     
     def extract_node_properties(self, stix_obj: Dict[str, Any]) -> Dict[str, Any]:
         """STIX 객체에서 노드 속성 추출"""
+        if not stix_obj or not isinstance(stix_obj, dict):
+            return {"id": "unknown", "type": "unknown"}
+        
         properties = {
-            "id": stix_obj.get("id"),
-            "type": stix_obj.get("type"),
+            "id": stix_obj.get("id", "unknown"),
+            "type": stix_obj.get("type", "unknown"),
             "created": stix_obj.get("created"),
             "modified": stix_obj.get("modified"),
         }
@@ -215,9 +218,12 @@ class UCOMapper:
     
     def extract_relationship_properties(self, stix_rel: Dict[str, Any]) -> Dict[str, Any]:
         """STIX 관계에서 속성 추출"""
+        if not stix_rel or not isinstance(stix_rel, dict):
+            return {"id": "unknown", "relationship_type": "unknown"}
+        
         properties = {
-            "id": stix_rel.get("id"),
-            "relationship_type": stix_rel.get("relationship_type"),
+            "id": stix_rel.get("id", "unknown"),
+            "relationship_type": stix_rel.get("relationship_type", "unknown"),
             "created": stix_rel.get("created"),
             "modified": stix_rel.get("modified"),
         }

@@ -111,6 +111,10 @@ class StixToNeo4jImporter:
             labels = self.mapper.get_labels(obj_type)
             properties = self.mapper.extract_node_properties(obj)
             
+            # properties가 None이거나 빈 딕셔너리인 경우 기본값 설정
+            if not properties or properties is None:
+                properties = {"id": obj.get("id", "unknown")}
+            
             node_data.append({
                 "labels": labels,
                 "properties": properties
@@ -141,16 +145,28 @@ class StixToNeo4jImporter:
             simple_query = f"""
             UNWIND $nodes AS node
             CREATE (n:{labels_str})
-            SET n = node.properties
+            SET n += node.properties
             """
             
             for i in range(0, len(batch_for_labels), batch_size):
                 batch = batch_for_labels[i:i + batch_size]
+                # 모든 properties를 전달하되, Neo4j 쿼리에서 유효성 검사
                 properties_only = [nd["properties"] for nd in batch]
+                
                 try:
                     self.conn.execute_write(simple_query, {"nodes": properties_only})
                 except Exception as e:
                     logger.warning(f"배치 임포트 실패: {e}")
+                    # 개별 처리로 폴백
+                    for nd in batch:
+                        try:
+                            single_query = f"""
+                            CREATE (n:{labels_str})
+                            SET n += $props
+                            """
+                            self.conn.execute_write(single_query, {"props": nd["properties"]})
+                        except Exception as single_e:
+                            logger.warning(f"개별 노드 임포트 실패: {single_e}")
         
         logger.info(f"  ✓ {obj_type}: {len(objects)}개 임포트 완료")
     
@@ -190,9 +206,20 @@ class StixToNeo4jImporter:
             for i in range(0, len(relationships), batch_size):
                 batch = relationships[i:i + batch_size]
                 try:
-                    self.conn.execute_write(query, {"rels": batch})
+                    result = self.conn.execute_write(query, {"rels": batch})
+                    # 결과 확인
+                    if hasattr(result, 'counters'):
+                        counters = result.counters
+                        if counters.relationships_created > 0:
+                            logger.info(f"  ✓ {rel_type} 배치 {i//batch_size + 1}: {counters.relationships_created}개 관계 생성")
+                        else:
+                            logger.warning(f"  ⚠️ {rel_type} 배치 {i//batch_size + 1}: 관계 생성되지 않음")
                 except Exception as e:
                     logger.warning(f"관계 임포트 실패 ({rel_type}): {e}")
+                    # 디버깅을 위해 첫 번째 관계 정보 출력
+                    if batch:
+                        first_rel = batch[0]
+                        logger.warning(f"  첫 번째 관계: source_id={first_rel['source_id']}, target_id={first_rel['target_id']}")
             
             total_imported += len(relationships)
             logger.info(f"    - {rel_type}: {len(relationships)}개")
