@@ -238,8 +238,145 @@ class UCOMapper:
 class MISPToUCOMapper:
     """MISP 객체를 UCO 온톨로지로 매핑"""
     
+    def extract_event_properties(self, event: Dict[str, Any]) -> Dict[str, Any]:
+        """MISP 이벤트에서 속성 추출"""
+        if not event or not isinstance(event, dict):
+            return {"id": "unknown", "type": "Event"}
+        
+        properties = {
+            "id": str(event.get("id", "unknown")),
+            "type": "Event",
+            "uuid": event.get("uuid", ""),
+            "info": event.get("info", ""),
+            "date": event.get("date", ""),
+            "timestamp": event.get("timestamp", ""),
+            "published": event.get("published", False),
+            "threat_level_id": event.get("threat_level_id", ""),
+            "analysis": event.get("analysis", ""),
+            "distribution": event.get("distribution", ""),
+            "sharing_group_id": event.get("sharing_group_id", ""),
+            "org_id": event.get("org_id", ""),
+            "orgc_id": event.get("orgc_id", ""),
+        }
+        
+        # 날짜 변환
+        if "publish_timestamp" in event:
+            properties["publish_timestamp"] = event["publish_timestamp"]
+        
+        if "attribute_count" in event:
+            properties["attribute_count"] = event["attribute_count"]
+        
+        if "object_count" in event:
+            properties["object_count"] = event["object_count"]
+        
+        return {k: v for k, v in properties.items() if v is not None and v != ""}
+    
+    def extract_attribute_properties(self, attr: Dict[str, Any]) -> Dict[str, Any]:
+        """MISP 속성에서 속성 추출"""
+        if not attr or not isinstance(attr, dict):
+            return {"id": "unknown", "type": "Attribute"}
+        
+        properties = {
+            "id": attr.get("uuid", "unknown"),
+            "type": "Attribute",
+            "uuid": attr.get("uuid", ""),
+            "event_id": attr.get("event_id", ""),
+            "category": attr.get("category", ""),
+            "type_name": attr.get("type", ""),
+            "value": attr.get("value", ""),
+            "comment": attr.get("comment", ""),
+            "to_ids": attr.get("to_ids", False),
+            "distribution": attr.get("distribution", ""),
+            "sharing_group_id": attr.get("sharing_group_id", ""),
+            "timestamp": attr.get("timestamp", ""),
+            "disable_correlation": attr.get("disable_correlation", False),
+            "object_relation": attr.get("object_relation", ""),
+        }
+        
+        # 태그 정보
+        if "Tag" in attr:
+            properties["tags"] = [tag.get("name", "") for tag in attr["Tag"] if tag.get("name")]
+        
+        # 갤럭시 정보
+        if "Galaxy" in attr:
+            properties["galaxies"] = [galaxy.get("name", "") for galaxy in attr["Galaxy"] if galaxy.get("name")]
+        
+        return {k: v for k, v in properties.items() if v is not None and v != ""}
+    
+    def extract_object_properties(self, obj: Dict[str, Any]) -> Dict[str, Any]:
+        """MISP 객체에서 속성 추출"""
+        if not obj or not isinstance(obj, dict):
+            return {"id": "unknown", "type": "Object"}
+        
+        properties = {
+            "id": obj.get("uuid", "unknown"),
+            "type": "Object",
+            "uuid": obj.get("uuid", ""),
+            "event_id": obj.get("event_id", ""),
+            "name": obj.get("name", ""),
+            "meta_category": obj.get("meta-category", ""),
+            "description": obj.get("description", ""),
+            "template_uuid": obj.get("template_uuid", ""),
+            "template_version": obj.get("template_version", ""),
+            "timestamp": obj.get("timestamp", ""),
+            "distribution": obj.get("distribution", ""),
+            "sharing_group_id": obj.get("sharing_group_id", ""),
+        }
+        
+        # 객체의 속성 수
+        if "Attribute" in obj:
+            properties["attribute_count"] = len(obj["Attribute"])
+        
+        return {k: v for k, v in properties.items() if v is not None and v != ""}
+    
+    def extract_galaxy_properties(self, galaxy: Dict[str, Any]) -> Dict[str, Any]:
+        """MISP 갤럭시에서 속성 추출"""
+        if not galaxy or not isinstance(galaxy, dict):
+            return {"id": "unknown", "type": "Galaxy"}
+        
+        properties = {
+            "id": galaxy.get("uuid", "unknown"),
+            "type": "Galaxy",
+            "uuid": galaxy.get("uuid", ""),
+            "event_id": galaxy.get("event_id", ""),
+            "name": galaxy.get("name", ""),
+            "type_name": galaxy.get("type", ""),
+            "description": galaxy.get("description", ""),
+            "version": galaxy.get("version", ""),
+            "namespace": galaxy.get("namespace", ""),
+            "kill_chain_order": galaxy.get("kill_chain_order", ""),
+        }
+        
+        # 갤럭시 값들 (문자열로 변환)
+        if "GalaxyCluster" in galaxy:
+            cluster_values = []
+            for cluster in galaxy["GalaxyCluster"]:
+                cluster_str = f"{cluster.get('value', '')} ({cluster.get('description', '')})"
+                cluster_values.append(cluster_str)
+            properties["cluster_values"] = cluster_values
+        
+        return {k: v for k, v in properties.items() if v is not None and v != ""}
+    
+    def extract_tag_properties(self, tag: Dict[str, Any]) -> Dict[str, Any]:
+        """MISP 태그에서 속성 추출"""
+        if not tag or not isinstance(tag, dict):
+            return {"id": "unknown", "type": "Tag"}
+        
+        properties = {
+            "id": tag.get("id", "unknown"),
+            "type": "Tag",
+            "name": tag.get("name", ""),
+            "colour": tag.get("colour", "#000000"),
+            "exportable": tag.get("exportable", True),
+            "hide_tag": tag.get("hide_tag", False),
+            "org_id": tag.get("org_id", ""),
+            "user_id": tag.get("user_id", ""),
+        }
+        
+        return {k: v for k, v in properties.items() if v is not None and v != ""}
+    
     def extract_node_properties(self, misp_obj: Dict[str, Any]) -> Dict[str, Any]:
-        """MISP 객체에서 노드 속성 추출"""
+        """MISP 객체에서 노드 속성 추출 (기존 호환성)"""
         properties = {
             "id": f"misp-{misp_obj.get('uuid')}",
             "type": "misp-" + misp_obj.get("type", "unknown"),
@@ -256,4 +393,6 @@ class MISPToUCOMapper:
             properties["description"] = misp_obj["comment"]
         
         return {k: v for k, v in properties.items() if v is not None}
+
+
 

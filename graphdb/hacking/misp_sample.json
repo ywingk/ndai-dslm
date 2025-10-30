@@ -1,0 +1,557 @@
+[
+  {
+    "id": "1",
+    "uuid": "6b4fd87d-e642-4005-a34f-5edb6c656777",
+    "info": "Sample Security Event 1",
+    "date": "2025-10-28",
+    "timestamp": "1761656183",
+    "published": false,
+    "threat_level_id": "2",
+    "analysis": "1",
+    "distribution": "1",
+    "sharing_group_id": "",
+    "org_id": "1",
+    "orgc_id": "1",
+    "publish_timestamp": "",
+    "attribute_count": 4,
+    "object_count": 0,
+    "Attribute": [
+      {
+        "uuid": "fc881f89-0657-4621-ab22-d6d430918362",
+        "event_id": "1",
+        "category": "Payload delivery",
+        "type": "md5",
+        "value": "5d41402abc4b2a76b9719d911017c592",
+        "comment": "Sample md5 attribute for event 1",
+        "to_ids": true,
+        "distribution": "0",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": [
+          {
+            "name": "malware",
+            "colour": "#ff0000"
+          }
+        ]
+      },
+      {
+        "uuid": "1662925d-744d-41df-be73-614c22e12d56",
+        "event_id": "1",
+        "category": "Artifacts dropped",
+        "type": "sha1",
+        "value": "356a192b7913b04c54574d18c28d46e6395428ab",
+        "comment": "Sample sha1 attribute for event 1",
+        "to_ids": false,
+        "distribution": "1",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "160ea2a3-2f79-47c7-8ed1-4df5185caab6",
+        "event_id": "1",
+        "category": "Network activity",
+        "type": "sha256",
+        "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "comment": "Sample sha256 attribute for event 1",
+        "to_ids": true,
+        "distribution": "2",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "0b545a0d-5b6f-4f32-8347-f1cb70573151",
+        "event_id": "1",
+        "category": "External analysis",
+        "type": "filename",
+        "value": "malware_1_3.exe",
+        "comment": "Sample filename attribute for event 1",
+        "to_ids": false,
+        "distribution": "3",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": [
+          {
+            "name": "phishing",
+            "colour": "#00ff00"
+          }
+        ]
+      }
+    ],
+    "Object": [],
+    "Galaxy": [],
+    "Tag": [
+      {
+        "name": "malware",
+        "colour": "#ff0000"
+      },
+      {
+        "name": "ransomware",
+        "colour": "#ff6600"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "uuid": "2278191b-77af-4a56-a028-b6a463a9d918",
+    "info": "Sample Security Event 2",
+    "date": "2025-10-27",
+    "timestamp": "1761569783",
+    "published": true,
+    "threat_level_id": "3",
+    "analysis": "2",
+    "distribution": "2",
+    "sharing_group_id": "",
+    "org_id": "1",
+    "orgc_id": "1",
+    "publish_timestamp": "1761573383",
+    "attribute_count": 5,
+    "object_count": 3,
+    "Attribute": [
+      {
+        "uuid": "e96ce3ab-d2b4-4b1d-b495-013530832293",
+        "event_id": "2",
+        "category": "Payload delivery",
+        "type": "md5",
+        "value": "5d41402abc4b2a76b9719d911017c592",
+        "comment": "Sample md5 attribute for event 2",
+        "to_ids": true,
+        "distribution": "0",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": [
+          {
+            "name": "malware",
+            "colour": "#ff0000"
+          }
+        ]
+      },
+      {
+        "uuid": "bfd6ad7e-a01d-4534-8b91-8457cd7ef89e",
+        "event_id": "2",
+        "category": "Artifacts dropped",
+        "type": "sha1",
+        "value": "356a192b7913b04c54574d18c28d46e6395428ab",
+        "comment": "Sample sha1 attribute for event 2",
+        "to_ids": false,
+        "distribution": "1",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "f42b9bec-7dfb-45d4-8816-d415c0f78cb6",
+        "event_id": "2",
+        "category": "Network activity",
+        "type": "sha256",
+        "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "comment": "Sample sha256 attribute for event 2",
+        "to_ids": true,
+        "distribution": "2",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "324fef02-4856-4869-b901-bdaf9f616978",
+        "event_id": "2",
+        "category": "External analysis",
+        "type": "filename",
+        "value": "malware_2_3.exe",
+        "comment": "Sample filename attribute for event 2",
+        "to_ids": false,
+        "distribution": "3",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": [
+          {
+            "name": "phishing",
+            "colour": "#00ff00"
+          }
+        ]
+      },
+      {
+        "uuid": "f4605676-7c8c-485c-af2d-71ebb603b9cc",
+        "event_id": "2",
+        "category": "Payload delivery",
+        "type": "ip-src",
+        "value": "192.168.1.104",
+        "comment": "Sample ip-src attribute for event 2",
+        "to_ids": true,
+        "distribution": "0",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      }
+    ],
+    "Object": [
+      {
+        "uuid": "b6f7f7ab-4c01-4fd3-a96e-078713dc55af",
+        "event_id": "2",
+        "name": "file",
+        "meta-category": "file",
+        "description": "Sample file object for event 2",
+        "template_uuid": "8e999346-9434-47e7-b2e5-094b2cb50e3c",
+        "template_version": "1",
+        "timestamp": "1761742583",
+        "distribution": "0",
+        "sharing_group_id": "",
+        "Attribute": [
+          {
+            "uuid": "f0089a3e-166d-45ab-a44e-18db1ff8519c",
+            "event_id": "2",
+            "category": "Payload delivery",
+            "type": "ip-src",
+            "value": "192.168.1.200",
+            "comment": "Sample ip-src attribute for event 2",
+            "to_ids": true,
+            "distribution": "0",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_0",
+            "Tag": []
+          },
+          {
+            "uuid": "cfcd7d46-8481-4576-a718-f2044953f9f8",
+            "event_id": "2",
+            "category": "Artifacts dropped",
+            "type": "ip-dst",
+            "value": "10.0.0.301",
+            "comment": "Sample ip-dst attribute for event 2",
+            "to_ids": false,
+            "distribution": "1",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_1",
+            "Tag": []
+          }
+        ]
+      },
+      {
+        "uuid": "8f7510c5-d93e-41a4-8a8a-e31b7b368dac",
+        "event_id": "2",
+        "name": "ip-port",
+        "meta-category": "network",
+        "description": "Sample ip-port object for event 2",
+        "template_uuid": "371e27d9-97e2-4a64-8e73-c71e2a350b67",
+        "template_version": "1",
+        "timestamp": "1761742583",
+        "distribution": "1",
+        "sharing_group_id": "",
+        "Attribute": [
+          {
+            "uuid": "7180ec06-2ddd-4041-b9b8-9804f94e58cd",
+            "event_id": "2",
+            "category": "Payload delivery",
+            "type": "ip-src",
+            "value": "192.168.1.200",
+            "comment": "Sample ip-src attribute for event 2",
+            "to_ids": true,
+            "distribution": "0",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_0",
+            "Tag": []
+          },
+          {
+            "uuid": "dc2a3b09-c4d9-4b83-b97d-e79a9c66b84d",
+            "event_id": "2",
+            "category": "Artifacts dropped",
+            "type": "ip-dst",
+            "value": "10.0.0.301",
+            "comment": "Sample ip-dst attribute for event 2",
+            "to_ids": false,
+            "distribution": "1",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_1",
+            "Tag": []
+          },
+          {
+            "uuid": "1fe7a3f5-7424-420e-a2e7-1b8bcc3a8534",
+            "event_id": "2",
+            "category": "Network activity",
+            "type": "domain",
+            "value": "malicious2102.com",
+            "comment": "Sample domain attribute for event 2",
+            "to_ids": true,
+            "distribution": "2",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_2",
+            "Tag": [
+              {
+                "name": "campaign",
+                "colour": "#00ffff"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "uuid": "67603dce-3537-4956-9c07-012764f10b37",
+        "event_id": "2",
+        "name": "domain-ip",
+        "meta-category": "email",
+        "description": "Sample domain-ip object for event 2",
+        "template_uuid": "9f13d5bd-44a4-42f4-b064-55d572200416",
+        "template_version": "1",
+        "timestamp": "1761742583",
+        "distribution": "2",
+        "sharing_group_id": "",
+        "Attribute": [
+          {
+            "uuid": "1ed2459c-12c9-41ac-b25c-3910c9d641f7",
+            "event_id": "2",
+            "category": "Payload delivery",
+            "type": "ip-src",
+            "value": "192.168.1.200",
+            "comment": "Sample ip-src attribute for event 2",
+            "to_ids": true,
+            "distribution": "0",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_0",
+            "Tag": []
+          },
+          {
+            "uuid": "a1817a66-5dc6-40e8-bb26-82e1ecb12755",
+            "event_id": "2",
+            "category": "Artifacts dropped",
+            "type": "ip-dst",
+            "value": "10.0.0.301",
+            "comment": "Sample ip-dst attribute for event 2",
+            "to_ids": false,
+            "distribution": "1",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_1",
+            "Tag": []
+          },
+          {
+            "uuid": "5dceecc3-7511-46db-b9a6-5ea025936f24",
+            "event_id": "2",
+            "category": "Network activity",
+            "type": "domain",
+            "value": "malicious2102.com",
+            "comment": "Sample domain attribute for event 2",
+            "to_ids": true,
+            "distribution": "2",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_2",
+            "Tag": [
+              {
+                "name": "campaign",
+                "colour": "#00ffff"
+              }
+            ]
+          },
+          {
+            "uuid": "45be6313-b5b4-4bc7-9149-83da336826fd",
+            "event_id": "2",
+            "category": "External analysis",
+            "type": "url",
+            "value": "http://malicious2103.com/payload",
+            "comment": "Sample url attribute for event 2",
+            "to_ids": false,
+            "distribution": "3",
+            "sharing_group_id": "",
+            "timestamp": "1761742583",
+            "disable_correlation": false,
+            "object_relation": "relation_3",
+            "Tag": []
+          }
+        ]
+      }
+    ],
+    "Galaxy": [],
+    "Tag": [
+      {
+        "name": "malware",
+        "colour": "#ff0000"
+      },
+      {
+        "name": "ransomware",
+        "colour": "#ff6600"
+      },
+      {
+        "name": "apt",
+        "colour": "#0066ff"
+      }
+    ]
+  },
+  {
+    "id": "3",
+    "uuid": "0fc90628-a856-4c59-bf20-3138af961aa8",
+    "info": "Sample Security Event 3",
+    "date": "2025-10-26",
+    "timestamp": "1761483383",
+    "published": false,
+    "threat_level_id": "4",
+    "analysis": "0",
+    "distribution": "3",
+    "sharing_group_id": "",
+    "org_id": "1",
+    "orgc_id": "1",
+    "publish_timestamp": "",
+    "attribute_count": 6,
+    "object_count": 0,
+    "Attribute": [
+      {
+        "uuid": "0601b0ca-6ec9-4ea3-ad34-ca2a294bc5b4",
+        "event_id": "3",
+        "category": "Payload delivery",
+        "type": "md5",
+        "value": "5d41402abc4b2a76b9719d911017c592",
+        "comment": "Sample md5 attribute for event 3",
+        "to_ids": true,
+        "distribution": "0",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": [
+          {
+            "name": "malware",
+            "colour": "#ff0000"
+          }
+        ]
+      },
+      {
+        "uuid": "2fa003cd-a2c6-4a2a-99f6-6f04601c206a",
+        "event_id": "3",
+        "category": "Artifacts dropped",
+        "type": "sha1",
+        "value": "356a192b7913b04c54574d18c28d46e6395428ab",
+        "comment": "Sample sha1 attribute for event 3",
+        "to_ids": false,
+        "distribution": "1",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "7aa57fe9-b416-46c3-bd8f-e878ef7b52fe",
+        "event_id": "3",
+        "category": "Network activity",
+        "type": "sha256",
+        "value": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "comment": "Sample sha256 attribute for event 3",
+        "to_ids": true,
+        "distribution": "2",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "83012203-d76a-4bc7-b446-8bc356e1689d",
+        "event_id": "3",
+        "category": "External analysis",
+        "type": "filename",
+        "value": "malware_3_3.exe",
+        "comment": "Sample filename attribute for event 3",
+        "to_ids": false,
+        "distribution": "3",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": [
+          {
+            "name": "phishing",
+            "colour": "#00ff00"
+          }
+        ]
+      },
+      {
+        "uuid": "3169d425-ce1a-4b96-96b7-50ab0a57ee96",
+        "event_id": "3",
+        "category": "Payload delivery",
+        "type": "ip-src",
+        "value": "192.168.1.104",
+        "comment": "Sample ip-src attribute for event 3",
+        "to_ids": true,
+        "distribution": "0",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      },
+      {
+        "uuid": "6461d5cd-e2fd-4a8b-8293-79618cadba2b",
+        "event_id": "3",
+        "category": "Artifacts dropped",
+        "type": "ip-dst",
+        "value": "10.0.0.205",
+        "comment": "Sample ip-dst attribute for event 3",
+        "to_ids": false,
+        "distribution": "1",
+        "sharing_group_id": "",
+        "timestamp": "1761742583",
+        "disable_correlation": false,
+        "object_relation": "",
+        "Tag": []
+      }
+    ],
+    "Object": [],
+    "Galaxy": [
+      {
+        "uuid": "2fbd5aa0-8c8c-4632-abbc-9cc72cde4ab3",
+        "event_id": "3",
+        "name": "Sample mitre-intrusion-set Galaxy",
+        "type": "mitre-intrusion-set",
+        "description": "Sample galaxy for mitre-intrusion-set",
+        "version": "1",
+        "namespace": "sample.mitre-intrusion-set",
+        "kill_chain_order": "mitre-attack",
+        "GalaxyCluster": [
+          {
+            "uuid": "958074f3-384d-4491-9da8-dd5edeafafcf",
+            "value": "Sample Cluster 3",
+            "description": "Sample cluster for event 3",
+            "type": "mitre-intrusion-set"
+          }
+        ]
+      }
+    ],
+    "Tag": [
+      {
+        "name": "malware",
+        "colour": "#ff0000"
+      }
+    ]
+  }
+]

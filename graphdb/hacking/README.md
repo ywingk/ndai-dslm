@@ -37,6 +37,14 @@ UCO는 사이버 보안 정보를 표현하기 위한 표준 온톨로지입니�
 - **Tool**: 공격 도구
 - **Vulnerability**: 취약점 (CVE 등)
 
+### MISP 주요 객체
+
+- **Event**: 보안 이벤트 (인시던트, 위협 정보 등)
+- **Attribute**: 관찰 가능한 속성 (IP, 도메인, 파일 해시 등)
+- **Object**: 구조화된 객체 (파일, 네트워크 연결 등)
+- **Galaxy**: 위협 분류 체계 (MITRE ATT&CK, Malware 등)
+- **Tag**: 분류 및 라벨링
+
 ## 📋 사전 준비
 
 ### 1. Neo4j 설치 및 실행
@@ -89,12 +97,12 @@ misp = PyMISP('https://your-misp-instance', 'your-api-key')
 ```bash
 # MITRE ATT&CK 데이터 임포트
 python stix_to_neo4j.py \
-  --input enterprise-attack.json \
+  --input ./data/enterprise-attack.json \
   --clear
 
 # 특정 공격 기법만 필터링
 python stix_to_neo4j.py \
-  --input enterprise-attack.json \
+  --input ./data/enterprise-attack.json \
   --filter-type attack-pattern \
   --keywords "ransomware" "phishing" \
   --clear
@@ -102,25 +110,45 @@ python stix_to_neo4j.py \
 # 연결 정보 직접 지정
 python stix_to_neo4j.py \
   --input data/stix_bundle.json \
-  --uri bolt://localhost:7688 \
+  --uri bolt://localhost:7687 \
   --user neo4j \
-  --password hacking_slm_2025 \
+  --password domain_slm_2025 \
   --clear
 ```
 
 ### 2단계: MISP 데이터를 Neo4j로 임포트
 
 ```bash
-# MISP API에서 직접 가져오기
-python misp_to_neo4j.py \
-  --misp-url https://your-misp-instance \
-  --misp-key your-api-key \
-  --days 30 \
-  --clear
+# MISP 샘플 데이터 생성 및 임포트
+python generate_misp_sample.py --output misp_sample.json --count 5
+python misp_to_neo4j.py --input misp_sample.json --clear
+
+# MISP API에서 직접 다운로드
+python download_misp_data.py \
+  --url https://your-misp-instance.com \
+  --key your-api-key \
+  --output misp_events.json
 
 # MISP JSON 파일에서 임포트
+python misp_to_neo4j.py --input misp_events.json --clear
+
+# 특정 이벤트만 임포트
 python misp_to_neo4j.py \
-  --input misp_export.json \
+  --input misp_events.json \
+  --event-id 12345 \
+  --clear
+
+# 특정 태그가 포함된 이벤트만 임포트
+python misp_to_neo4j.py \
+  --input misp_events.json \
+  --tags malware ransomware \
+  --clear
+
+# 위협 수준별 필터링
+python misp_to_neo4j.py \
+  --input misp_events.json \
+  --threat-level 4 \
+  --analysis-level 2 \
   --clear
 ```
 
@@ -308,3 +336,10 @@ python generate_qa_dataset.py \
 - [MITRE ATT&CK](https://attack.mitre.org/)
 - [MISP Project](https://www.misp-project.org/)
 - [Neo4j Graph Database](https://neo4j.com/)
+
+## 📝 참고사항
+앞으로는 docker 설정을 변경할 때:
+- docker-compose.yml 수정
+- neo4j_config.py 동일하게 수정
+- 컨테이너 재시작: docker-compose down -v && docker-compose up -d
+- 인증 잠금이 발생하면 -v 옵션으로 볼륨까지 삭제해야 합니다! 💡

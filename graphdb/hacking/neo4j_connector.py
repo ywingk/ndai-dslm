@@ -62,6 +62,7 @@ class Neo4jConnector:
     def create_indexes(self):
         """인덱스 생성"""
         indexes = [
+            # STIX 관련 인덱스
             "CREATE INDEX stix_id_idx IF NOT EXISTS FOR (n:StixObject) ON (n.id)",
             "CREATE INDEX attack_pattern_name_idx IF NOT EXISTS FOR (n:AttackPattern) ON (n.name)",
             "CREATE INDEX malware_name_idx IF NOT EXISTS FOR (n:Malware) ON (n.name)",
@@ -70,6 +71,18 @@ class Neo4jConnector:
             "CREATE INDEX vulnerability_cve_idx IF NOT EXISTS FOR (n:Vulnerability) ON (n.cve_id)",
             "CREATE INDEX indicator_pattern_idx IF NOT EXISTS FOR (n:Indicator) ON (n.pattern)",
             "CREATE INDEX observable_value_idx IF NOT EXISTS FOR (n:Observable) ON (n.value)",
+            
+            # MISP 관련 인덱스
+            "CREATE INDEX misp_event_id_idx IF NOT EXISTS FOR (n:Event) ON (n.id)",
+            "CREATE INDEX misp_event_uuid_idx IF NOT EXISTS FOR (n:Event) ON (n.uuid)",
+            "CREATE INDEX misp_attribute_uuid_idx IF NOT EXISTS FOR (n:Attribute) ON (n.uuid)",
+            "CREATE INDEX misp_attribute_value_idx IF NOT EXISTS FOR (n:Attribute) ON (n.value)",
+            "CREATE INDEX misp_attribute_type_idx IF NOT EXISTS FOR (n:Attribute) ON (n.type_name)",
+            "CREATE INDEX misp_object_uuid_idx IF NOT EXISTS FOR (n:Object) ON (n.uuid)",
+            "CREATE INDEX misp_object_name_idx IF NOT EXISTS FOR (n:Object) ON (n.name)",
+            "CREATE INDEX misp_galaxy_uuid_idx IF NOT EXISTS FOR (n:Galaxy) ON (n.uuid)",
+            "CREATE INDEX misp_galaxy_name_idx IF NOT EXISTS FOR (n:Galaxy) ON (n.name)",
+            "CREATE INDEX misp_tag_name_idx IF NOT EXISTS FOR (n:Tag) ON (n.name)",
         ]
         
         for index_query in indexes:
@@ -82,7 +95,15 @@ class Neo4jConnector:
     def create_constraints(self):
         """제약 조건 생성"""
         constraints = [
+            # STIX 관련 제약 조건
             "CREATE CONSTRAINT stix_id_unique IF NOT EXISTS FOR (n:StixObject) REQUIRE n.id IS UNIQUE",
+            
+            # MISP 관련 제약 조건
+            "CREATE CONSTRAINT misp_event_id_unique IF NOT EXISTS FOR (n:Event) REQUIRE n.id IS UNIQUE",
+            "CREATE CONSTRAINT misp_event_uuid_unique IF NOT EXISTS FOR (n:Event) REQUIRE n.uuid IS UNIQUE",
+            "CREATE CONSTRAINT misp_attribute_uuid_unique IF NOT EXISTS FOR (n:Attribute) REQUIRE n.uuid IS UNIQUE",
+            "CREATE CONSTRAINT misp_object_uuid_unique IF NOT EXISTS FOR (n:Object) REQUIRE n.uuid IS UNIQUE",
+            "CREATE CONSTRAINT misp_galaxy_uuid_unique IF NOT EXISTS FOR (n:Galaxy) REQUIRE n.uuid IS UNIQUE",
         ]
         
         for constraint_query in constraints:
@@ -132,4 +153,6 @@ def get_connector(config: Neo4jConfig):
         yield connector
     finally:
         connector.close()
+
+
 

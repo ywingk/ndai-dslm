@@ -646,7 +646,7 @@ def main():
     )
     parser.add_argument(
         "--uri",
-        default="bolt://localhost:7688",
+        default="bolt://localhost:7687",
         help="Neo4j URI"
     )
     parser.add_argument(
@@ -656,7 +656,7 @@ def main():
     )
     parser.add_argument(
         "--password",
-        default="hacking_slm_2025",
+        default="domain_slm_2025",
         help="Neo4j 비밀번호"
     )
     
@@ -685,4 +685,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
